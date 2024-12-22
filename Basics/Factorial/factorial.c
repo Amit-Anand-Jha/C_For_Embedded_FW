@@ -1,26 +1,27 @@
 #include<stdio.h>
+#include "../../Common_Defs/inc/common_defs.h"
 
 int main()
 {
 	int n,val;
 
-	printf("\n\nNamaste !\n\nThis code will print Factorial Value of the number you will enter below\n\n");
+	TRACE_HIGH("Namaste !  This code will print Factorial Value of the number you will enter below");
 	
-	printf("\n\nPlease enter the number\n\n");
+	TRACE_HIGH("Please enter the numbee");
 	
 	scanf("%d",&n);
 	
 	if(n<0)
 	{
-		printf("\n\nFactorial value does not exist for negative numbers\n\n");
+		TRACE_HIGH("Factorial value does not exist for negative numbers");
 	}
 	else if(n==0)
 	{
-		printf("\n\nWell, weirldy 0!=1\n\n");
+		TRACE_HIGH("Well, weirldy 0!=1");
 	}
 	else
 	{
-		printf("\n\nThe value of factorial of %d is\n",n);
+		TRACE_HIGH("The value of factorial of %d is",n);
 	
 		val=factorial(n);
 	}
@@ -35,7 +36,7 @@ int factorial(int n)
 		k=n*factorial(n-1);
 		count=count-1;
 	}
-	printf("\n%d,k");
+	TRACE_HIGH("%d,k");
 
 	return k;
 }
