@@ -1,27 +1,27 @@
-
 #include<stdio.h>
+#include "../Common_Defs/inc/common_defs.h"
 
 int main()
 {
 	int n;
 
-	printf("\n\nNamaste !\n\nThis code will print Hemachandra Series\n\n");
+	TRACE_HIGH("Namaste ! This code will print Hemachandra Series");
 	
-	printf("\n\nPlease enter the number of terms you want to see\n\n");
+	TRACE_HIGH("Please enter the number of terms you want to see");
 	
 	scanf("%d",&n);
 	
 	if(n<0)
 	{
-		printf("\n\nNumber of terms can't be negative\n\n");
+		TRACE_HIGH("\n\nNumber of terms can't be negative\n\n");
 	}
 	else if(n==0)
 	{
-		printf("\n\nYou wanted to see no term, so scoot!\n\n");
+		TRACE_HIGH("\n\nYou wanted to see no term, so scoot!\n\n");
 	}
 	else
 	{
-		printf("\n\nThe first %d terms of Hemachamdra Series are\n",n);
+		TRACE_HIGH("\n\nThe first %d terms of Hemachamdra Series are\n",n);
 	
 		hema(n);
 	}
@@ -34,15 +34,15 @@ int hema(int n)
 	
 	if(n==1)
 	{
-		printf("%d \n\n",a1);
+		TRACE_HIGH("%d ",a1);
 	}
 	else if (n==2)
 	{
-		printf("%d , %d \n\n",a1,a2);
+		TRACE_HIGH("%d , %d ",a1,a2);
 	}
 	else
 	{
-		printf("%d , %d , ",a1,a2);
+		TRACE_HIGH("%d , %d , ",a1,a2);
 		for(i=0;i<n-2;i++)
 		{
 			a3=a1+a2;
