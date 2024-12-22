@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include "../Common_Defs/inc/common_defs.h"
+#include "../../Common_Defs/inc/common_defs.h"
 
 int main()
 {
