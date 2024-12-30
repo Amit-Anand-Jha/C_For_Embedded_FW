@@ -228,52 +228,61 @@ void append_linked_list_node_at_end(struct ll *head, float data)
  *           (iii) the position (index) at which the new node has to be inserted in the LL
  *
  * @RETURN :
- *           None - This API returns nothing
+ *           None - This API returns nothing as it modifies the original Linked List itself
  * ----------------------------------------------------------------------------------------*/
 void append_new_node_in_ll_at_pos_i(struct ll *head, float data_to_append, int pos)
 {
 	// If the head passed is NULL - the LL doesnt exist
 	if(head == NULL)
 	{
-		TRACE("If the head pointer is NULL hence the linked list doesnt exist");
+		TRACE("The head pointer is 'NULL' hence the linked list doesnt exist");
 	}
 
 	else
 	{
 		printf("\n");
-		TRACE_HIGH("Adding the new node at the end of existing LL with the head node address 0x%x\n", head);
+		TRACE_HIGH("The LL where value of %f is to be inserted at index %d has head = 0x%x", data_to_append, pos, head);
+		disp_linked_list(head);
+		TRACE_HIGH("Adding the new node in the existing LL with the head node address 0x%x\n", head);
 
 		// Count the number of nodes already existing in the LL
 		// If the number of nodes < pos where the new node is to appended then
 		// append the new node at the end of the LL. Else append the new node
 		// at the given position.
 		int num_nodes = count_num_nodes(head);
-
+		
 		if(pos > num_nodes)
 		{
+			TRACE_HIGH("Adding the new node at the end of existing LL with total nodes %d and the head node address 0x%x\n", num_nodes, head);
 			append_linked_list_node_at_end(head, data_to_append);
 		}
 
 		else
 		{
+			TRACE_HIGH("Adding the new node at index %d of existing LL with total nodes %d and the head node address 0x%x\n", pos, num_nodes, head);
+
 			// Allocate the memory location for the new node
+			// The new_node is address of the new node that is created since its a pointer
 			struct ll *new_node = (struct ll*)malloc(sizeof(struct ll*));
 
 			// Assign the data to the new node
 			new_node->value = data_to_append;
 
-			// A temporary pointer to save the address of node which would 
-			// now follow the new node. This is done to keep the links of 
-			// the LL intact so that the chain doesnt break
-			struct ll *temp_ptr = NULL;
-
-			while(pos > 0)
+			while(pos > 1)
 			{
 				head = head->link;
 				pos = pos - 1;
+				//TRACE_HIGH("head = 0x%x and pos = %d", head, pos);
 			}
-			head->link = &new_node;
-			new_node->link = NULL;
+			new_node->link = head->link;
+			//TRACE_HIGH("new_node->link = head->link = 0x%x", new_node->link);
+			
+			// We assign the head_link the value of new_node and not &new_node
+			// This is because &new_node is the address of the pointer variable new_node
+			// While new_node is the value inside the pointer variable - which is the address of the new node
+			head->link = new_node;
+			
+			//TRACE_HIGH("head->link = new_node = 0x%x  and  &new_node = 0x%x", new_node, &new_node);
 		}
 	}
 }
@@ -286,7 +295,7 @@ void append_new_node_in_ll_at_pos_i(struct ll *head, float data_to_append, int p
  * @BRIEF : This API displays the Linked List completely from first to last node
  *
  * @INPUT :
- *           (i)   head pointer of the LL where the new node has to be inserted
+ *           (i)   head pointer of the LL which is to be displayed 
  *
  * @RETURN :
  *           None - This API returns nothing
